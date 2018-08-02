@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+}
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}
+.btn{
+  margin-right: 1%;
+}
+h3{
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; color: blue;
+}
+.jumbotrom{
+  max-width: 60%;
+}
+p{
+  background-color: darkkhaki;
+}

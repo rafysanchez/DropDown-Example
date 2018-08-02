@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="jumbotron">
+    <h3>User Information</h3>
+    <br>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="col">
+      <div>
+          <p *ngIf="isValidFormSubmitted" [ngClass]="'success'">
+            Form submitted successfully.  {{user.userName}} //    {{ tech.techName }}
+          </p>
+        </div>
+    <div class="row">
+
+
+      <form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+        <table class="table">
+          <tr>
+            <td>Select Profile: </td>
+            <td>
+              <select name="profile" [(ngModel)]="user.profile" required #profile="ngModel" (change)="onProfileChange()" class="form-control">
+                <option [ngValue]="null" disabled>Choose your profile</option>
+                <option *ngFor="let prf of allProfiles" [ngValue]="prf">
+                  {{ prf.prName }}
+                </option>
+              </select>
+              <div *ngIf="profile.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                Profile required.
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>
+              <input name="name" [ngModel]="user.userName" required #name="ngModel">
+              <div *ngIf="name.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                Name required.
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Select Technologies: </td>
+            <td>
+              <select multiple name="selectedTechs" [compareWith]="compareTech" [ngModel]="user.technologies" required #selectedTechs="ngModel">
+                <option *ngFor="let tech of allTechnologies" [ngValue]="tech" class="form-control">
+                  {{ tech.techName }}
+                </option>
+              </select>
+              <div *ngIf="selectedTechs.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                Technologies required.
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="btn btn-primary"> Submit </button>
+              <button type="button" class="btn btn-primary" type="button" (click)="setDefaultValues()">Set Default</button>
+              <button type="button" class="btn btn-primary" type="button" (click)="resetForm(userForm)">Reset</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+    </div>
+  </div>
+</div>
